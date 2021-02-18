@@ -1,0 +1,10 @@
+vehicle
+ X maxH2ChargingCapacity, hydrogen charging capacity 
+
+h2Station
+ - vehicleDischargingCapacity, maximum charging capacity to vehicle
+
+Control action
+How to guarantee the vehicle's h2 could satify its travel demands
+ - travel distance to calculate lower limit
+ - limit of SOC

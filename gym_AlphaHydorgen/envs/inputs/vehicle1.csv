@@ -1,0 +1,3 @@
+fuelEff,maxH2ChargingCapacity,tankCapacity,dist_mean_wd,dist_std_wd,dist_mean_nwd,dist_std_nwd,parkSchd_wd,parkSchd_nwd
+8.7,100,5600,50,5,20,10,1,2
+H2 consumption per unit distance [g/kM],"maximum H2 charging capacity, g/s","maximum H2 tank storage capacity, g",Mean value daily cruise distance during working day,Standard Deviation of daily cruise distance during working day,Mean value daily cruise distance during non-working day,Standard Deviation of daily cruise distance during non-working day,"Vehicle parking schedule for working day, corresponding to the column index of vehicle_atHomeSchd.csv","Vehicle parking schedule for non-working day, corresponding to the column index of vehicle_atHomeSchd.csv"
