@@ -9,14 +9,14 @@ AlphaHydrogen is an open source OpenAI Gym environment that simulates the energy
 # Overview
 Cleaner power production, distributed renewable generation, building-vehicle integration, hydrogen (H2) storage and associated energy infrastructures are promising candidates for transformation towards a carbon-neutrality community with district energy flexibility enhancement. AlphaHydrogen allows the easy implementation of advanced controll agents in a multi-agent setting to achieve customized goals: load shifting, CO2 emission reduction, operational cost saving, and etc. 
 
-<img src="docs/overview.jpeg" data-canonical-src="docs/overview.jpeg" width="1000" />
+<img src="docs/figs/overview.png" data-canonical-src="docs/figs/overview.png" width="900" />
 
 
 # Code Usage
 ### Clone repository
 ```
-git clone https://github.com/LBNL-ETA/City-Scale-Electricity-Use-Prediction
-cd City-Scale-Electricity-Use-Prediction
+git clone https://github.com/WalterZWang/AlphaHydrogen.git
+cd AlphaHydrogen
 ```
 
 ### Set up the environment 
@@ -24,30 +24,27 @@ Set up the virtual environment with your preferred environment/package manager.
 
 The instruction here is based on **conda**. ([Install conda](https://docs.anaconda.com/anaconda/install/))
 ```
-conda create --name cityEleEnv python=3.8 -c conda-forge -f requirements.txt
-conda activate cityEleEnv
+conda create --name alphaHydrogen python=3.8 -c conda-forge -f requirements.txt
+conda activate alphaHydrogen
 ```
 
 ### Repository structure
-``bin``: Runnable programs, including Python scripts and Jupyter Notebooks
+``gym_AlphaHydrogen``: Code and data to develop the OpenAI Gym environment
 
-``data``: Raw data, including city-level electricity consumption and weather data
+``docs``: Papers published with this environment
 
-``docs``: Manuscript submitted version
-
-``results``: Cleaned-up data, generated figures and tables
+``test.ipynb``: A example case to test the environment
 
 
 ### Running
-You can replicate our experiments, generate figures and tables used in the manuscript using the Jupyter notebooks saved in ``bin``: `section3.1 EDA.ipynb`, `section3.2 linear model.ipynb`, `section3.3 time-series model.ipynb`, `section3.4 tabular data model.ipynb`, `section4.1 model comparison.ipynb`, `section4.2 heat wave.ipynb`, `section4.3 convid.ipynb`
+You can test the environment using the Jupyter notebook ``test.ipynb``
 
-*Notes.*
-- Official Documentation of [Facebook Prophet](https://facebook.github.io/prophet/).
-- Official Documentation of [Microsoft lightGBM](https://github.com/Microsoft/LightGBM). 
+*Notes*
+- Official Documentation of [OpenAI Gym](https://gym.openai.com/).
 
 ### Feedback
 
-Feel free to send any questions/feedback to: [Zhe Wang](mailto:zwang5@lbl.gov ) or [Tianzhen Hong](mailto:thong@lbl.gov)
+Feel free to send any questions/feedback to: [Zhe Wang](mailto:zwang5@lbl.gov ) or [Yingdong He](mailto:heyingdong2017@berkeley.edu)
 
 ### Citation
 
