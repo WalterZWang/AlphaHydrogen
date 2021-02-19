@@ -11,7 +11,6 @@ Cleaner power production, distributed renewable generation, building-vehicle int
 
 <img src="docs/figs/overview.png" width="900" />
 
-
 # Code Usage
 ### Clone repository
 ```
