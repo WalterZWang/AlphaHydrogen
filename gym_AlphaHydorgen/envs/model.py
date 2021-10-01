@@ -5,7 +5,7 @@ from datetime import datetime
 
 class dataFromCSV():
 
-    def __init__(self, csv_file, stepLenth):
+    def __init__(self, csv_file, stepLenth, simulationYear):
         '''Input csv file needs to be hourly load 
         '''
         self.csv_file = csv_file
@@ -15,10 +15,10 @@ class dataFromCSV():
         if self.load.shape[1] > 1:
             print('Input building load file have more than 1 column, only the first column will be used.')
         self.stepLenth = stepLenth  #unit: s
-        self.setTimeStep()
+        self.setTimeStep(simulationYear)
 
-    def setTimeStep(self):
-        start_time = datetime(year = 2019, month = 1, day =1)
+    def setTimeStep(self, simulationYear):
+        start_time = datetime(year = simulationYear, month = 1, day =1)
         self.load.index = pd.date_range(start_time, periods = self.load.shape[0], freq = 'H')
         self.load = self.load.resample('{}T'.format(self.stepLenth/60)).interpolate()
 
@@ -26,8 +26,8 @@ class dataFromCSV():
 
 class Building(dataFromCSV):
 
-    def __init__(self, csv_file, stepLenth):
-        super().__init__(csv_file, stepLenth)
+    def __init__(self, csv_file, stepLenth, simulationYear):
+        super().__init__(csv_file, stepLenth, simulationYear)
 
     def getLoad(self, timeStep):
         '''Time step start with 0
@@ -40,8 +40,8 @@ class Building(dataFromCSV):
 
 class PV(dataFromCSV):
 
-    def __init__(self, csv_file, stepLenth):
-        super().__init__(csv_file, stepLenth)
+    def __init__(self, csv_file, stepLenth, simulationYear):
+        super().__init__(csv_file, stepLenth, simulationYear)
 
     def getPower(self, timeStep):
         '''Time step start with 0
@@ -82,7 +82,7 @@ class Vehicle:
         self.fuelCell = fuelCell
         self.stepLenth = stepLenth                # unit: s
         # Initialize H2 storage in the tank
-        self.tankVol = 0                          # unit: g
+        self.tankVol = self.tankCapacity/2                          # unit: g
     
     def h2FromStation(self, chargeRate):
         '''
@@ -93,6 +93,7 @@ class Vehicle:
         Output
             -- real charge rate
         '''
+        assert chargeRate>=0, "Charge rate must be positive value"
         realH2ChargeRate = capacity_storage_constraint(controlSignal=chargeRate, 
                                                        maxCapacity=self.maxH2ChargingCapacity, 
                                                        maxStorage=self.tankCapacity, 
@@ -109,18 +110,20 @@ class Vehicle:
         self.tankVol -= H2Consmption
 
 
-    def eleToGrid(self, dischargePower):
+    def eleToGrid(self, dischargeRate):
         '''
         ------------------------------------
         Args
-            -- dischargePower, control signal for the discharge, unit: kW
+            -- dischargeRate, control signal for the discharge, unit: g/s
         ------------------------------------
         Output
-            -- real discharge power
+            -- real discharge power, unit: kW
         '''
+        assert dischargeRate>=0, "Discharge rate must be positive value"
         fuelCellEff = self.fuelCell.getEff()                  # kJ per g H2 consumption
         fuelCellCapacity = self.fuelCell.getCapacity()        # kW
-        currentStorage = self.tankVol*fuelCellEff             # unit: kJ
+        currentStorage = self.tankVol*fuelCellEff             # kJ
+        dischargePower = dischargeRate*fuelCellEff            # kW
         realDischargePower = capacity_storage_constraint(controlSignal=dischargePower, 
                                                          maxCapacity=fuelCellCapacity, 
                                                          maxStorage=float('inf'), 

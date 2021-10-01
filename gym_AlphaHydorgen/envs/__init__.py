@@ -1,1 +1,1 @@
-from gym_AlphaHydrogen.envs.hydrogenCommunity import AlphaHydorgen
+from gym_AlphaHydrogen.envs.hydrogenCommunity import hydrogenCommunity
