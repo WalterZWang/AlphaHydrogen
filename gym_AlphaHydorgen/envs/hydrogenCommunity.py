@@ -70,7 +70,7 @@ class hydrogenCommunity(gym.Env):
         freq = '{}H'.format(self.stepLenth/3600)
         self.timeIndex = pd.date_range(start_time, periods=self.n_steps, freq=freq)
 
-        # Calculate the net load for each time step
+        # Calculate the load for each time step
         self.buildingLoad = self._calculateBuildingLoad(building_list, self.stepLenth, self.simulationYear)
         self.pvGeneration = self._calculatePVGeneration(pv_list, self.stepLenth, self.simulationYear)
 
@@ -193,7 +193,8 @@ class hydrogenCommunity(gym.Env):
         '''Get the park state and maximum traveling distance of the vehicle
         Return: park state (1 for at home, 0 for not at home)
                 predicted maximum travel distance
-                cruiseBackHour: The hour vehicle returns to home, the tankVol is reduced at this hour
+                cruiseBackHour: Boolean, Whether it is the hour vehicle returns to home, 
+                    the tankVol is reduced at this hour
         '''
         weekday = self.timeIndex[self.time_step_idx].weekday()
         hour = self.timeIndex[self.time_step_idx].hour
