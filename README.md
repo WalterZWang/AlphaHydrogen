@@ -28,15 +28,46 @@ conda activate alphaHydrogen
 ```
 
 ### Repository structure
+```
+|
+├── LICENSE
+│
+├── README.md
+│
+├── requirements.txt
+│
+├── gym_AlphaHydrogen
+│   └── envs
+│   │   ├──data
+│   │   ├──inputs
+│   │   ├──hydrogenCommunity.py
+│   │   ├──model.py
+│   │   ├──data_cleaning.ipynb
+│   │   ├──test_gym.ipynb
+│   │   └──test_model.ipynb
+│   └── _init_.py
+│
+└── docs
+
+```
+
 ``gym_AlphaHydrogen``: Code and data to develop the OpenAI Gym environment
 
-``docs``: Papers published with this environment
+``gym_AlphaHydrogen/envs/hydrogenCommunity.py``: Code of the environment
 
-``test.ipynb``: A example case to test the environment
+``gym_AlphaHydrogen/envs/model.py``: Individual models, including the model for vehicle, building, PV. grid, H2 station etc.
+
+``gym_AlphaHydrogen/envs/inputs``: Input file of the environment
+
+``gym_AlphaHydrogen/envs/test_gym.ipynb``: File to test the gym environment
+
+``gym_AlphaHydrogen/envs/test_model.ipynb``: File to test the model
+
+``docs``: documents (papers, figures) related to this environment
 
 
 ### Running
-You can test the environment using the Jupyter notebook ``test.ipynb``
+You can test the environment using the Jupyter notebook ``gym_AlphaHydrogen/envs/test_gym.ipynb``
 
 *Notes*
 - Official Documentation of [OpenAI Gym](https://gym.openai.com/).
@@ -45,11 +76,12 @@ You can test the environment using the Jupyter notebook ``test.ipynb``
 
 Feel free to send any questions/feedback to: [Zhe Wang](mailto:zwang5@lbl.gov ) or [Yingdong He](mailto:heyingdong2017@berkeley.edu)
 
+
+<!--
 ### Citation
 
 If you use our code, please cite us as follows:
 
-<!--
 ```
 @inproceedings{Chen2020COHORT,
 author = {Chen, Bingqing and Francis, Jonathan and Pritoni, Marco and Kar, Soummya and Berg\'{e}s, Mario},
